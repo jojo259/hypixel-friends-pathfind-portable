@@ -45,13 +45,16 @@ def readPathfindTargets():
 		exit()
 
 def getUuid(username):
-	try:
-		apiUrl = f'https://api.mojang.com/users/profiles/minecraft/{username}'
-		dataReceived = getApi(apiUrl)
-		uuid = dataReceived['id']
-		return uuid
-	except:
-		pass
+	returned = False
+	while not returned:
+		try:
+			apiUrl = f'https://api.mojang.com/users/profiles/minecraft/{username}'
+			dataReceived = getApi(apiUrl)
+			uuid = dataReceived['id']
+			returned = True
+			return uuid
+		except:
+			pass
 
 def getFriends(getUuid):
 	gotFriends = False
