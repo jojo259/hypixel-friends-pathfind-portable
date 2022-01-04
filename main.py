@@ -87,7 +87,7 @@ def getUsernameFromUuid(uuid):
 			returned = True
 			return lastUsername
 		except:
-			return 'nil'
+			return uuid
 
 def uuidListToUsernames(uuidList):
 	for i, uuid in enumerate(uuidList):
