@@ -23,25 +23,25 @@ def testApiKey():
 	apiUrl = f'https://api.hypixel.net/friends?key={apiKey}&uuid=1f2e58ced9164d55bd3fa7f4a81dd09f'
 	dataReceived = getApi(apiUrl)
 	if dataReceived != None:
-		print('api key works')
+		print('	api key works')
 	else:
-		print('invalid api key, exiting')
+		print('	invalid api key, exiting')
 		exit()
 
 def readPathfindTargets():
 	try:
 		global pathfindFrom
 		pathfindFrom = open('pathfindFrom.txt').read()
-		print(f'got pathfindFrom:	{pathfindFrom}')
+		print(f'	got pathfindFrom:	{pathfindFrom}')
 	except:
-		print('failed to read pathfindFrom, exiting')
+		print('	failed to read pathfindFrom, exiting')
 		exit()
 	try:
 		global pathfindTo
 		pathfindTo = open('pathfindTo.txt').read()
-		print(f'got pathfindTo:		{pathfindTo}')
+		print(f'	got pathfindTo:		{pathfindTo}')
 	except:
-		print('failed to read pathfindTo, exiting')
+		print('	failed to read pathfindTo, exiting')
 		exit()
 
 def getUuid(username):
@@ -62,6 +62,7 @@ def getFriends(getUuid):
 		if dataReceived != None:
 			if 'records' not in dataReceived:
 				print('rate limited')
+				time.sleep(1)
 				continue
 			for friendsEntry in dataReceived['records']:
 				uuidSender = friendsEntry['uuidSender']
@@ -130,8 +131,10 @@ testApiKey()
 
 global pathfindFrom
 global pathfindTo
+print()
 print('reading pathfinding targets')
 readPathfindTargets()
+print()
 
 pathfindFrom = getUuid(pathfindFrom)
 pathfindTo = getUuid(pathfindTo)
