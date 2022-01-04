@@ -64,7 +64,7 @@ def getFriends(getUuid):
 		friendsList = []
 		if dataReceived != None:
 			if 'records' not in dataReceived:
-				print('rate limited')
+				print('failed, probably rate limited')
 				time.sleep(1)
 				continue
 			for friendsEntry in dataReceived['records']:
@@ -145,7 +145,8 @@ pathfindTo = getUuid(pathfindTo)
 timerStart = time.time()
 pathFound = pathfindFriends(pathfindFrom, pathfindTo)
 timerDone = time.time()
-print(f'time: {int((timerDone - timerStart)*1000)}ms')
+print()
+print(f'TIME: {int(((timerDone - timerStart)/60)*100)/100}mins = {int(timerDone - timerStart)}s = {int((timerDone - timerStart)*1000)}ms')
 pathFoundUsernames = uuidListToUsernames(pathFound)
 pathFoundUsernamesPretty = ' --> '.join(pathFoundUsernames)
 
