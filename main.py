@@ -22,6 +22,7 @@ def testApiKey():
 	global apiKey
 	apiUrl = f'https://api.hypixel.net/friends?key={apiKey}&uuid=1f2e58ced9164d55bd3fa7f4a81dd09f'
 	dataReceived = getApi(apiUrl)
+	print()
 	if dataReceived != None:
 		print('	api key works')
 	else:
@@ -48,7 +49,7 @@ def getFriends(getUuid):
 		friendsList = []
 		if dataReceived != None:
 			if 'records' not in dataReceived:
-				print('failed, probably rate limited')
+				print('failed, probably rate limited, retrying')
 				time.sleep(1)
 				continue
 			for friendsEntry in dataReceived['records']:
@@ -119,7 +120,8 @@ testApiKey()
 global pathfindFrom
 global pathfindTo
 print()
-print('pathfinding targets:')
+print('pathfinding targets (not case-sensitive):')
+print()
 pathfindFrom = input('	pathfind from:	')
 pathfindTo = input('	pathfind to:	')
 print()
