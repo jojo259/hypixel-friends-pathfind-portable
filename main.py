@@ -11,11 +11,11 @@ def getApi(url):
 		return None
 
 def readApiKey():
+	global apiKey
 	try:
-		global apiKey
 		apiKey = open('apiKey.txt').read()
 	except:
-		print('failed to read api key, exiting')
+		print('\nerror, create text file "apiKey" with your hypixel api key\nexiting')
 		exit()
 
 def testApiKey():
@@ -26,22 +26,6 @@ def testApiKey():
 		print('	api key works')
 	else:
 		print('	invalid api key, exiting')
-		exit()
-
-def readPathfindTargets():
-	try:
-		global pathfindFrom
-		pathfindFrom = open('pathfindFrom.txt').read()
-		print(f'	got pathfindFrom:	{pathfindFrom}')
-	except:
-		print('	failed to read pathfindFrom, exiting')
-		exit()
-	try:
-		global pathfindTo
-		pathfindTo = open('pathfindTo.txt').read()
-		print(f'	got pathfindTo:		{pathfindTo}')
-	except:
-		print('	failed to read pathfindTo, exiting')
 		exit()
 
 def getUuid(username):
@@ -135,8 +119,9 @@ testApiKey()
 global pathfindFrom
 global pathfindTo
 print()
-print('reading pathfinding targets')
-readPathfindTargets()
+print('pathfinding targets:')
+pathfindFrom = input('	pathfind from:	')
+pathfindTo = input('	pathfind to:	')
 print()
 
 pathfindFrom = getUuid(pathfindFrom)
@@ -146,9 +131,11 @@ timerStart = time.time()
 pathFound = pathfindFriends(pathfindFrom, pathfindTo)
 timerDone = time.time()
 print()
-print(f'TIME: {int(((timerDone - timerStart)/60)*100)/100}mins = {int(timerDone - timerStart)}s = {int((timerDone - timerStart)*1000)}ms')
+print(f'Time: {int(((timerDone - timerStart)/60)*100)/100}mins = {int(timerDone - timerStart)}s = {int((timerDone - timerStart)*1000)}ms')
 pathFoundUsernames = uuidListToUsernames(pathFound)
 pathFoundUsernamesPretty = ' --> '.join(pathFoundUsernames)
 
 print()
 print(pathFoundUsernamesPretty)
+
+while True: time.sleep(1) #indefinitely pause
