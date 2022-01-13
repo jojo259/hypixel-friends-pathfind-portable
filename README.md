@@ -5,6 +5,7 @@ limited by the hypixel api ratelimit to 120 friends lists checked per minute.
 
 setup:
 * run it lol idk
+* (make apiKey.txt and install requests module with 'pip install requests'
 
 if it is a long path it will take a long time to find.
 
