@@ -2,13 +2,17 @@ import requests
 import time
 
 def getApi(url):
-	try:
-		receivedApi = requests.get(url,timeout=1)
-		receivedApi = receivedApi.json()
-
-		return receivedApi
-	except:
-		return None
+	while True:
+		try:
+			apiCalled = requests.get(url, timeout = 10).json()
+			if apiCalled['success']:
+				return apiCalled
+			else:
+				print('api error, probably throttled, retrying')
+				time.sleep(1)
+		except:
+			print('api error, probably timeout, retrying')
+			time.sleep(1)
 
 def readApiKey():
 	global apiKey
